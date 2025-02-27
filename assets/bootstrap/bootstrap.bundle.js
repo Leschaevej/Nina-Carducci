@@ -4765,7 +4765,7 @@
     _hideModal() {
       this._element.style.display = 'none';
 
-      this._element.setAttribute('aria-hidden', true);
+      this._element.setAttribute('aria-hidden', false);
 
       this._element.removeAttribute('aria-modal');
 
