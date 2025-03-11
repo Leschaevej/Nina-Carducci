@@ -4,6 +4,10 @@
 	font-style: normal;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
 	max-width: 1920px;
 	margin: auto;
@@ -117,22 +121,22 @@ nav a {
 	flex-direction: column;
 	align-items: center;
 }
-
 .portfolio h2 {
 	padding-top: 60px;
+}
+#gallery {
+	scroll-margin-top: 50px;
 }
 .gallery {
 	justify-content: center;
 }
-
 .gallery ul {
 	display: flex;
 	justify-content: center;
 }
-
 .nav-pills .nav-link.active-tag, .nav-pills .show > .nav-link {
 	color: #fff;
-	background-color: #797444;
+	background-color: #797544;
 	border-radius:0 ;
 	align-items: center;
 }

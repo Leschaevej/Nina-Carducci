@@ -124,29 +124,24 @@
       const fullSizeSrc = element.attr("data-src") || element.attr("src");
       const lightbox = $(`#${lightboxId}`);
       const lightboxImage = lightbox.find(".lightboxImage");
-      
-      // Récupérer l'index de l'image dans la galerie
-      const galleryItems = lightbox.closest('.gallery').find('.gallery-item');
-      const currentIndex = galleryItems.index(element);  // Trouver l'index de l'image courante
     
-      // Mettre l'image à sa taille originale
+      // Récupérer toutes les images visibles après filtrage
+      const galleryItems = element.closest('.gallery').find('.gallery-item:visible');
+    
+      // Trouver l'index de l'image cliquée dans la liste des images visibles
+      const currentIndex = galleryItems.index(element);
+    
+      // Afficher l'image sélectionnée
       lightboxImage.attr("src", fullSizeSrc);
-      lightboxImage.css({
-        'width': 'auto', 
-        'height': 'auto', 
-        'max-width': '100%',
-        'max-height': '80vh' // Limite la taille de l'image à 80% de la hauteur de la fenêtre
-      });
+      lightbox.data("current-index", currentIndex);  // Stocker le bon index
     
-      // Stocker l'index dans la modale
-      lightbox.data("current-index", currentIndex);
-    
+      // Ouvrir la modale
       lightbox.modal("toggle");
-    },
+    },    
 
     nextImage(lightboxId) {
       const lightbox = $(`#${lightboxId}`);
-      const galleryItems = lightbox.closest('.gallery').find('.gallery-item');
+      const galleryItems = lightbox.closest('.gallery').find('.gallery-item:visible'); // Sélectionner uniquement les éléments visibles
       let currentIndex = lightbox.data("current-index");
     
       // Incrémenter l'index pour obtenir l'image suivante
@@ -161,11 +156,11 @@
       // Mettre à jour l'image dans la modale
       lightboxImage.attr("src", fullSizeSrc);
       lightbox.data("current-index", currentIndex);  // Mettre à jour l'index actuel
-    },
+    },    
     
     prevImage(lightboxId) {
       const lightbox = $(`#${lightboxId}`);
-      const galleryItems = lightbox.closest('.gallery').find('.gallery-item');
+      const galleryItems = lightbox.closest('.gallery').find('.gallery-item:visible'); // Sélectionner uniquement les éléments visibles
       let currentIndex = lightbox.data("current-index");
     
       // Décrémenter l'index pour obtenir l'image précédente
@@ -180,7 +175,7 @@
       // Mettre à jour l'image dans la modale
       lightboxImage.attr("src", fullSizeSrc);
       lightbox.data("current-index", currentIndex);  // Mettre à jour l'index actuel
-    },    
+    },        
 
     createLightBox(gallery, lightboxId, navigation) {
       gallery.append(`<div class="modal fade" id="${
